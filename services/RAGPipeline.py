@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import concurrent.futures
 from typing import List, Dict, Any, Generator, Optional
 from services.Chat import ChatService
 from services.Search import SearchService
@@ -81,8 +82,8 @@ class RAGPipeline:
         self.search_service = SearchService()
         self.procedure_service = ProcedureService()
         self.procedure_filter_agent = ProcedureFilterAgent()
-        # Giới hạn số chunk tối đa trong context để tránh tràn token
-        self.MAX_CONTEXT_CHUNKS = 50
+        # Giới hạn số chunk tối đa trong context để tối ưu tốc độ và chất lượng
+        self.MAX_CONTEXT_CHUNKS = 10
         self.MAX_TOOL_ITERATIONS = 3
 
 
@@ -224,12 +225,18 @@ class RAGPipeline:
         yield {"step": "retrieval", "status": "processing", "data": None}
 
         retrieved_docs = []
-        for sq in sub_queries:
-            try:
-                docs = self.search_service.semantic_search(query=sq, top_k=10)
-                retrieved_docs.extend(docs)
-            except Exception as e:
-                print(f"Lỗi search cho query '{sq}': {e}")
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(max(len(sub_queries), 1), 5)) as executor:
+            future_to_sq = {
+                executor.submit(self.search_service.semantic_search, query=sq, top_k=8): sq
+                for sq in sub_queries
+            }
+            for future in concurrent.futures.as_completed(future_to_sq):
+                sq = future_to_sq[future]
+                try:
+                    docs = future.result()
+                    retrieved_docs.extend(docs)
+                except Exception as e:
+                    print(f"Lỗi search song song cho query '{sq}': {e}")
 
         unique_docs = self._deduplicate_docs(retrieved_docs)
         context_docs = unique_docs[:self.MAX_CONTEXT_CHUNKS]

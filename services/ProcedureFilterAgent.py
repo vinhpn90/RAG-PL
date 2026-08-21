@@ -53,7 +53,9 @@ class ProcedureFilterAgent:
         if not candidate_procedures or not user_query:
             return []
 
-        # Chuẩn bị danh sách ứng viên tóm tắt để tiết kiệm token
+        # Tối ưu tốc độ: Nếu danh sách ứng viên <= 2, trả về ngay không cần gọi thêm 1 lượt LLM
+        if len(candidate_procedures) <= 2:
+            return candidate_procedures
         candidates_summary = []
         candidates_map = {}
         for p in candidate_procedures:
