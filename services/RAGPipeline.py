@@ -201,7 +201,7 @@ class RAGPipeline:
             # stream=False -> ChatService yield đúng 1 lần: response.choices[0].message
             for message in self.chat_service.generate_response(
                 messages=[
-                    {"role": "system", "content": system_prompt + sub_query_prompt},
+                    {"role": "system", "content": sub_query_prompt},
                     *messages
                 ],
                 
