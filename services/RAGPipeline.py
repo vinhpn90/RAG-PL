@@ -153,26 +153,34 @@ NGỮ CẢNH PHÁP LÝ:
 {context_text}
 
 QUY TẮC ĐỐI SOÁT PHẠM VI ÁP DỤNG & CHỐNG ẢO GIÁC THỦ TỤC (BẮT BUỘC):
-1. PHÂN BIỆT RÀNH MẠCH ĐỐI TƯỢNG VÀ THẨM QUYỀN (LUẬT HỘ TỊCH HIỆN HÀNH):
-   - Đăng ký kết hôn giữa hai công dân Việt Nam cư trú trong nước: Thẩm quyền thuộc **Ủy ban nhân dân cấp xã** nơi cư trú của một trong hai bên; giải quyết **ngay trong ngày** làm việc (tối đa 05 ngày nếu cần xác minh).
-   - Đăng ký kết hôn có yếu tố nước ngoài (với người nước ngoài hoặc người VN định cư ở nước ngoài): Thẩm quyền thuộc **Ủy ban nhân dân cấp huyện** nơi cư trú của công dân VN; thời hạn giải quyết **15 ngày làm việc**.
-   - TUYỆT ĐỐI KHÔNG áp dụng quy định cũ (như nộp hồ sơ tại Sở Tư pháp, UBND cấp tỉnh phỏng vấn, công an thẩm tra...) cho thủ tục kết hôn thông thường của công dân Việt Nam trong nước.
-2. TÍNH NHẤT QUÁN GIỮA NGUỒN TRÍCH DẪN VÀ NỘI DUNG:
+1. PHÂN BIỆT RÀNH MẠCH ĐỐI TƯỢNG VÀ THẨM QUYỀN (LUẬT HỘ TỊCH & BỘ TƯ PHÁP):
+   - Đăng ký kết hôn / khai sinh / nhận cha con trong nước: Áp dụng **Luật Hộ tịch 2014**, **Nghị định 123/2015/NĐ-CP** và **Thông tư 04/2020/TT-BTP** của Bộ Tư pháp. Thẩm quyền thuộc **Ủy ban nhân dân cấp xã** nơi cư trú.
+   - TUYỆT ĐỐI KHÔNG áp dụng Thông tư 07/2023/TT-BNG của Bộ Ngoại giao (chỉ dùng cho cơ quan đại diện ngoại giao ở nước ngoài) cho thủ tục hộ tịch trong nước.
+   - Đăng ký kết hôn / khai sinh có yếu tố nước ngoài ở trong nước: Thẩm quyền thuộc **Ủy ban nhân dân cấp huyện**; thời hạn giải quyết theo luật định.
+   - TUYỆT ĐỐI KHÔNG áp dụng quy định cũ (như nộp hồ sơ tại Sở Tư pháp, UBND cấp tỉnh phỏng vấn, công an thẩm tra...) cho các thủ tục hộ tịch thông thường.
+
+2. NHẬN DIỆN VÀ PHÂN TÍCH TÌNH TIẾT ĐỜI SỐNG ĐA NGHĨA (QUAN TRỌNG):
+   - Khi câu hỏi chứa các thuật ngữ đời thường về quan hệ gia đình phức tạp như *"vợ hai", "vợ bé", "chồng hờ", "sống chung không kết hôn", "con riêng", "con ngoài giá thú", "đất giấy tay"...*, PHẢI nhận diện các kịch bản pháp lý khác nhau:
+     + **Trường hợp A (Tái hôn hợp pháp / Con riêng của vợ)**: Người chồng là Cha dượng (không có quan hệ huyết thống) -> Không được tự ý đứng tên Cha, nếu muốn nhận phải làm thủ tục **Nhận nuôi con nuôi** (theo Luật Nuôi con nuôi).
+     + **Trường hợp B (Chung sống thực tế / Con ruột ngoài giá thú)**: Người chồng có quan hệ huyết thống với đứa trẻ nhưng chưa đăng ký kết hôn với mẹ -> Hướng dẫn làm **Thủ tục kết hợp Đăng ký khai sinh và Đăng ký nhận cha con tại UBND cấp xã** (theo Điều 15 Thông tư 04/2020/TT-BTP).
+   - Nếu câu hỏi chưa rõ kịch bản, hãy giải thích ngắn gọn cả 2 trường hợp và đưa câu hỏi phân loại vào khối `<<<CLARIFICATION>>>`.
+
+3. TÍNH NHẤT QUÁN GIỮA NGUỒN TRÍCH DẪN VÀ NỘI DUNG:
    - Mọi nội dung, tiêu đề phân loại hoặc điều kiện áp dụng PHẢI phản ánh chính xác phạm vi điều chỉnh trong văn bản nguồn trích dẫn [N]. Không lấy quy định đặc thù của nhóm đối tượng này gán nhãn cho nhóm đối tượng khác.
 
 QUY TẮC ĐỊNH DẠNG & TRÌNH BÀY (100% TIẾNG VIỆT - CÔ ĐỌNG & MẠCH LẠC):
 1. LỜI MỞ ĐẦU & TÓM TẮT CỐT LÕI (EXECUTIVE SUMMARY):
-   - Bắt đầu bằng **01 câu chào ngắn gọn, thân thiện, tự nhiên** (có thể dùng 1 emoji vui vẻ, tích cực nếu phù hợp).
-   - Ngay sau câu chào, đưa ra **Tóm tắt nhanh (Điểm then chốt)** gồm 2-3 gạch đầu dòng ngắn gọn trả lời thẳng vào trọng tâm câu hỏi (Cơ quan có thẩm quyền, Giấy tờ bắt buộc cốt lõi, Thời hạn giải quyết) để người dùng nắm bắt ngay thông tin chỉ trong 30 giây.
-2. CHUẨN HÓA 100% TIẾNG VIỆT & CẤM DÙNG TỪ CẨU THẢ:
-   - TUYỆT ĐỐI KHÔNG sử dụng từ tiếng Anh (như `Same`, `Ditto`, `N/A`, `etc.`) hoặc viết tắt cẩu thả trong bất kỳ phần nào của câu trả lời.
-   - Trong Bảng biểu (Markdown Table), **MỖI Ô PHẢI ĐƯỢC ĐIỀN ĐẦY ĐỦ NỘI DUNG RÕ NGHĨA BẰNG TIẾNG VIỆT** (Ví dụ: ghi rõ *"UBND cấp xã nơi cư trú"*, *"Không thu lệ phí"*, *"Tương tự trường hợp 1"* thay vì viết "Same" hay để trống).
+   - Bắt đầu bằng **01 câu chào ngắn gọn, thân thiện, tự nhiên** (có thể dùng 1 emoji vui vẻ, tích cực).
+   - **NGAY SAU CÂU CHÀO, ĐẶT MỤC TÓM TẮT NHANH Ở ĐẦU BÀI** (TUYỆT ĐỐI KHÔNG ĐỂ Ở CUỐI): gồm 2-3 gạch đầu dòng ngắn gọn giải quyết thẳng câu hỏi (Cơ quan có thẩm quyền, Giấy tờ bắt buộc cốt lõi, Thời hạn giải quyết).
+2. CHUẨN HÓA 100% TIẾNG VIỆT & CẤM DÙNG TỪ TIẾNG ANH:
+   - TUYỆT ĐỐI KHÔNG sử dụng từ tiếng Anh (như `Same`, `Ditto`, `N/A`, `adoption`, `procedure`, `etc.`) hoặc viết tắt cẩu thả. Phân biệt rõ "Thủ tục nhận cha, mẹ, con" (huyết thống) và "Thủ tục nuôi con nuôi" (nuôi dưỡng).
+   - Trong Bảng biểu (Markdown Table), **MỖI Ô PHẢI ĐƯỢC ĐIỀN ĐẦY ĐỦ NỘI DUNG RÕ NGHĨA BẰNG TIẾNG VIỆT**.
 3. CẤU TRÚC PHÂN CẤP & TRÁNH TRÙNG LẶP DÀN TRẢI:
    - Cấp 1 (Chủ đề lớn / Tình huống phân loại): Dùng chữ cái in hoa in đậm **A., B., C...**
    - Cấp 2 (Nội dung chính / Đề mục con): Dùng chữ số thứ tự in đậm **1., 2., 3...**
    - Cấp 3 (Các ý nhỏ / Chi tiết hồ sơ): Dùng gạch đầu dòng **-** (dấu trừ)
    - Cấp 4 (Ý phụ giải thích thêm): Dùng dấu cộng **+**
-   - **Tránh trùng lặp:** Nếu đã trình bày chi tiết trong Bảng (Markdown Table), KHÔNG viết lại nguyên văn danh sách dài dòng ở các đoạn văn bên dưới. Hãy giữ câu trả lời súc tích, trực quan, cô đọng.
+   - **Tránh trùng lặp:** Nếu đã trình bày chi tiết trong Bảng, KHÔNG viết lại nguyên văn danh sách dài dòng ở các đoạn văn bên dưới.
 4. CẤM SỬ DỤNG EMOJI/ICON ĐÁNH SỐ:
    - TUYỆT ĐỐI KHÔNG dùng emoji số hiệu (1️⃣, 2️⃣, 3️⃣...) hoặc icon trang trí (🔹, 🔸, 📌...) trong nội dung quy định pháp lý, các bước và bảng biểu. Bắt buộc dùng chữ số thuần túy (1., 2., 3...).
 5. IN ĐẬM TỪ KHÓA QUAN TRỌNG:
@@ -239,11 +247,11 @@ QUY TẮC TRÍCH DẪN BẮT BUỘC:
             f"các sub-query khác. Nếu câu hỏi gốc có chủ thể/điều kiện chung (đối tượng áp dụng, điều kiện, "
             f"mốc thời gian, loại hình văn bản/thủ tục...), BẮT BUỘC phải LẶP LẠI (chèn lại) điều kiện đó "
             f"vào TỪNG sub-query được tách ra — không được lược bỏ dù đã nêu ở sub-query trước.\n"
-            f"2. Nếu câu hỏi của người dùng mang tính tổng quát nhưng có nhiều phân nhánh pháp lý theo quy định, "
+            f"2. BẢO TOÀN VÀ PHÂN TÍCH CÁC TÌNH TIẾT NHÂN THÂN & HÔN NHÂN ĐẶC THÙ: Nếu câu hỏi chứa các thuật ngữ đời thường như 'vợ hai', 'vợ bé', 'chồng hờ', 'sống chung không kết hôn', 'con riêng', 'con ngoài giá thú', 'đất giấy tay'..., TUYỆT ĐỐI KHÔNG được tự ý giản lược thành vợ chồng thông thường. Hãy tạo các sub-queries bao hàm cả trường hợp tái hôn hợp pháp (con riêng) và trường hợp chưa đăng ký kết hôn / con ngoài giá thú / thủ tục nhận cha con để thu thập đủ căn cứ pháp lý.\n"
+            f"3. Nếu câu hỏi của người dùng mang tính tổng quát nhưng có nhiều phân nhánh pháp lý theo quy định, "
             f"hãy tạo các sub-query bao quát quy định chung và các trường hợp chính để thu thập đủ tài liệu pháp lý.\n"
-            f"3. Chỉ tách thành nhiều sub-query khi các ý có thể tìm kiếm ĐỘC LẬP mà không mất nghĩa.\n"
-            f"4. Nếu câu hỏi gốc chỉ có MỘT ý cụ thể, hoặc các ý nhỏ gắn chặt với nhau, hãy trả về DUY NHẤT 1 sub-query "
-            f"đầy đủ nghĩa thay vì cố tách nhỏ.\n\n"
+            f"4. Chỉ tách thành nhiều sub-query khi các ý có thể tìm kiếm ĐỘC LẬP mà không mất nghĩa.\n"
+            f"5. Nếu câu hỏi gốc chỉ có MỘT ý cụ thể, hãy trả về 1 sub-query đầy đủ nghĩa thay vì cố tách nhỏ.\n\n"
             f"Trả về kết quả dưới dạng JSON thuần túy với key 'queries'.\n\n"
         )
 
