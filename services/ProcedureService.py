@@ -23,20 +23,25 @@ POSTGRES_PORT = int(os.getenv("POSTGRES_PORT", "5432"))
 
 class ProcedureService:
     def __init__(self):
-        try:
-            self.db_pool = psycopg2.pool.ThreadedConnectionPool(
-                minconn=1,
-                maxconn=5,
-                dbname=POSTGRES_DB,
-                user=POSTGRES_USER,
-                password=POSTGRES_PASSWORD,
-                host=POSTGRES_HOST,
-                port=POSTGRES_PORT,
-                connect_timeout=5
-            )
-        except Exception as e:
-            print(f"[ProcedureService] Không thể kết nối PostgreSQL: {e}")
-            self.db_pool = None
+        self.db_pool = None
+        for attempt in range(3):
+            try:
+                self.db_pool = psycopg2.pool.ThreadedConnectionPool(
+                    minconn=1,
+                    maxconn=5,
+                    dbname=POSTGRES_DB,
+                    user=POSTGRES_USER,
+                    password=POSTGRES_PASSWORD,
+                    host=POSTGRES_HOST,
+                    port=POSTGRES_PORT,
+                    connect_timeout=15
+                )
+                break
+            except Exception as e:
+                if attempt == 2:
+                    print(f"[ProcedureService] Không thể kết nối PostgreSQL: {e}")
+                import time
+                time.sleep(1)
 
     def _clean_doc_num(self, raw: str) -> str:
         if not raw:

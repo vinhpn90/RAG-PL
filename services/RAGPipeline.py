@@ -83,8 +83,8 @@ class RAGPipeline:
         self.procedure_service = ProcedureService()
         self.procedure_filter_agent = ProcedureFilterAgent()
         # Giới hạn số chunk tối đa trong context để tối ưu tốc độ và chất lượng
-        self.MAX_CONTEXT_CHUNKS = 10
-        self.MAX_TOOL_ITERATIONS = 3
+        self.MAX_CONTEXT_CHUNKS = 30
+        self.MAX_TOOL_ITERATIONS = 5
 
 
 
