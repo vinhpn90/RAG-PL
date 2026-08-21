@@ -7,9 +7,9 @@ from services.OpenAIExtended import OpenAIExtended
 load_dotenv()
 
 # --- CẤU HÌNH CHAT ---
-CHAT_MODEL_NAME = os.getenv('CHAT_MODEL_NAME', 'icmodel/icom-model-llm-ic-v3.5-27b-awq')
-CHAT_BASE_URL = os.getenv("CHAT_BASE_URL", "http://10.9.3.241:30040/v1")
-CHAT_API_KEY = os.getenv("CHAT_API_KEY", 'dont need')
+CHAT_MODEL_NAME = os.getenv('CHAT_MODEL_NAME') or os.getenv('LLM_MODEL_NAME', 'icmodel/icom-model-llm-ic-v3.5-27b-awq')
+CHAT_BASE_URL = os.getenv("CHAT_BASE_URL") or os.getenv("LLM_BASE_URL", "http://10.9.3.241:30040/v1")
+CHAT_API_KEY = os.getenv("CHAT_API_KEY") or os.getenv("LLM_API_KEY", 'dont need')
 
 # --- CẤU HÌNH EMBEDDING ---
 EMBEDDING_MODEL_NAME = os.getenv('EMBEDDING_MODEL_NAME', 'text-embedding-qwen3-embedding-0.6b')
@@ -17,9 +17,9 @@ EMBEDDING_BASE_URL = os.getenv("EMBEDDING_BASE_URL", "http://localhost:1234/v1")
 EMBEDDING_API_KEY = os.getenv("EMBEDDING_API_KEY", 'dont need')
 
 # --- CẤU HÌNH RERANK ---
-RERANKER_MODEL_NAME = os.getenv("RERANKER_MODEL_NAME")
-RERANKER_BASE_URL = os.getenv("RERANKER_BASE_URL")
-RERANKER_API_KEY = os.getenv("RERANKER_API_KEY")
+RERANKER_MODEL_NAME = os.getenv("RERANKER_MODEL_NAME") or os.getenv("RERANK_MODEL_NAME")
+RERANKER_BASE_URL = os.getenv("RERANKER_BASE_URL") or os.getenv("RERANK_BASE_URL")
+RERANKER_API_KEY = os.getenv("RERANKER_API_KEY") or os.getenv("RERANK_API_KEY")
 
 
 class ChatService:

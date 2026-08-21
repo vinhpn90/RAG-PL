@@ -4,6 +4,8 @@ import re
 from typing import List, Dict, Any, Generator, Optional
 from services.Chat import ChatService
 from services.Search import SearchService
+from services.ProcedureService import ProcedureService
+from services.ProcedureFilterAgent import ProcedureFilterAgent
 
 # Định nghĩa Tool cho LLM
 SEARCH_TOOLS = [
@@ -64,6 +66,8 @@ class RAGPipeline:
     def __init__(self):
         self.chat_service = ChatService()
         self.search_service = SearchService()
+        self.procedure_service = ProcedureService()
+        self.procedure_filter_agent = ProcedureFilterAgent()
         # Giới hạn số chunk tối đa trong context để tránh tràn token
         self.MAX_CONTEXT_CHUNKS = 50
         self.MAX_TOOL_ITERATIONS = 3
@@ -181,9 +185,27 @@ QUY TẮC XỬ LÝ CÂU HỎI & LÀM RÕ Ý ĐỊNH:
 2. Xử lý khi người dùng đã rõ trường hợp:
    - Nếu người dùng đã nêu rõ trường hợp cụ thể (ngay trong câu hỏi hoặc qua các lượt trao đổi trước đó), hãy trả lời trực tiếp, đầy đủ và chi tiết cho trường hợp đó. TUYỆT ĐỐI KHÔNG chèn khối <<<CLARIFICATION>>>.
 
-QUY TẮC ĐỊNH DẠNG TRÌNH BÀY (BẮT BUỘC):
-- TUYỆT ĐỐI KHÔNG sử dụng bảng (table/markdown table) để trình bày câu trả lời.
-- Hãy trình bày dưới dạng các đoạn văn, đề mục rõ ràng, sử dụng danh sách gạch đầu dòng (-) hoặc đánh số thứ tự (1, 2, 3...) để thông tin mạch lạc, dễ đọc.
+QUY TẮC ĐỊNH DẠNG & TRÌNH BÀY (BẮT BUỘC CHUẨN HÓA PHÂN CẤP ĐẦU MỤC):
+1. LỜI MỞ ĐẦU THÂN THIỆN, HÀI HƯỚC & NHIỆT TÌNH:
+   - Trước khi đi vào nội dung phân tích chi tiết, hãy LUÔN mở đầu bằng 01 câu ngắn gọn, tự nhiên, thể hiện sự sẵn lòng lắng nghe, nhiệt tình giúp đỡ (có thể sử dụng một vài từ ngữ vui vẻ, hóm hỉnh, tích cực để tạo không khí thoải mái nhưng vẫn giữ sự tôn trọng và chuyên nghiệp).
+   - Ví dụ:
+     + *"Dạ vâng, chuyện trọng đại thế này cứ để em cùng đồng hành gỡ rối pháp lý với bạn nhé!"*
+     + *"Chào bạn! Vấn đề này tuy nhiều điều khoản nhưng đừng lo, tôi sẽ tóm tắt thật dễ hiểu ngay dưới đây nhé!"*
+     + *"Rất vui được hỗ trợ bạn! Chúng ta cùng điểm qua các bước chuẩn chỉnh theo đúng quy định pháp luật nhé!"*
+2. PHÂN CẤP ĐẦU MỤC CHUẨN XÁC TỪ LỚN ĐẾN NHỎ:
+   - Cấp 1 (Chủ đề lớn / Các trường hợp chính / Tình huống phân loại): Dùng chữ cái in hoa in đậm **A., B., C...**
+   - Cấp 2 (Nội dung chính / Các bước thực hiện / Đề mục con): Dùng chữ số thứ tự in đậm **1., 2., 3...**
+   - Cấp 3 (Các ý nhỏ / Hồ sơ chi tiết / Điều kiện áp dụng): Dùng gạch đầu dòng **-** (dấu trừ)
+   - Cấp 4 (Chi tiết giải thích thêm / Ý phụ của từng mục): Dùng dấu cộng **+** (thụt dòng rõ ràng)
+3. SỬ DỤNG BẢNG (MARKDOWN TABLE) HỢP LÝ & ĐẸP MẮT:
+   - Khuyến khích sử dụng Bảng (Markdown table) khi cần so sánh giữa các trường hợp, tổng hợp danh mục hồ sơ, phân chia thẩm quyền hoặc thời hạn giải quyết để thông tin trực quan, dễ theo dõi.
+   - Bảng phải có hàng tiêu đề rõ ràng, các cột căn chỉnh ngắn gọn, súc tích và có gắn mã trích dẫn [N].
+4. TÍNH CHUẨN XÁC & RÕ RÀNG:
+   - Sử dụng in đậm (**...**) cho các từ khóa quan trọng (tên cơ quan thẩm quyền, thời hạn giải quyết, điều kiện tiên quyết, giấy tờ bắt buộc).
+   - Phần nội dung quy định pháp lý giữ văn phong chuẩn mực, gãy gọn, có căn cứ.
+5. TUYỆT ĐỐI KHÔNG DÙNG EMOJI/ICON ĐÁNH SỐ TRONG NỘI DUNG PHÁP LÝ:
+   - TUYỆT ĐỐI KHÔNG dùng các icon emoji số hiệu như 1️⃣, 2️⃣, 3️⃣, 4️⃣... hoặc các icon biểu tượng trang trí (🔹, 🔸, 📌, ⚖️...) trong nội dung các bước, bảng biểu hoặc điều khoản.
+   - BẮT BUỘC dùng ký tự số và chữ chuẩn: chữ số thông thường (1., 2., 3...), chữ cái (A., B., C...), dấu gạch ngang (-) và dấu cộng (+). Emoji chỉ được dùng tối đa 1 icon ở câu chào mở đầu, còn toàn bộ nội dung phân tích pháp lý phải nghiêm túc, chuẩn mực.
 
 QUY TẮC TRÍCH DẪN BẮT BUỘC:
 - Mọi thông tin lấy từ ngữ cảnh đều phải trích dẫn nguồn.
@@ -307,6 +329,23 @@ QUY TẮC TRÍCH DẪN BẮT BUỘC:
             },
         }
 
+        # ==========================================
+        # BƯỚC 2.6: CANDIDATE PROCEDURES
+        # ------------------------------------------
+        # Lấy danh sách thủ tục hành chính ứng viên từ căn cứ pháp lý
+        # (Sẽ được AI Filter Agent thẩm định sau khi có câu trả lời)
+        # ==========================================
+        doc_nums = [
+            d.get("metadata", {}).get("doc_num")
+            for d in context_docs
+            if d.get("metadata", {}).get("doc_num")
+        ]
+        candidate_procedures = self.procedure_service.get_related_procedures(
+            doc_nums=doc_nums,
+            user_query=question,
+            top_k=8
+        )
+
         # ==========================================================
         # BƯỚC 3+4 (GỘP): LLM STREAM — vừa quyết định tool call vừa
         # trả lời trực tiếp trong CÙNG một lần gọi, giống code mẫu.
@@ -383,6 +422,7 @@ QUY TẮC TRÍCH DẪN BẮT BUỘC:
                                 "status": "streaming",
                                 "data": {
                                     "chunk": chunk_to_send,
+                                    "citations": citation_map,
                                 },
                             }
 
@@ -523,6 +563,33 @@ QUY TẮC TRÍCH DẪN BẮT BUỘC:
                 "data": clarification,
             }
 
+        # ==========================================
+        # BƯỚC 4.5: AI AGENT THẨM ĐỊNH & LỌC THỦ TỤC
+        # ------------------------------------------
+        # Dùng LLM chuyên trách thẩm định câu hỏi + câu trả lời để loại bỏ thủ tục rác
+        # ==========================================
+        filtered_procedures = []
+        if candidate_procedures and clean_answer:
+            try:
+                filtered_procedures = self.procedure_filter_agent.filter_procedures(
+                    user_query=question,
+                    chatbot_answer=clean_answer,
+                    candidate_procedures=candidate_procedures
+                )
+            except Exception as e:
+                print(f"[RAGPipeline] Lỗi filter procedures: {e}")
+                filtered_procedures = candidate_procedures[:2]
+
+        if filtered_procedures:
+            yield {
+                "step": "related_procedures",
+                "status": "done",
+                "data": {
+                    "count": len(filtered_procedures),
+                    "procedures": filtered_procedures,
+                },
+            }
+
         yield {
             "step": "answer",
             "status": "done",
@@ -530,5 +597,6 @@ QUY TẮC TRÍCH DẪN BẮT BUỘC:
                 "text": clean_answer,
                 "citations": citation_map,
                 "clarification": clarification,
+                "related_procedures": filtered_procedures,
             },
         }

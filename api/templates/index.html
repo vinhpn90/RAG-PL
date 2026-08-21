@@ -112,12 +112,160 @@
             margin-bottom: 8px;
         }
 
+        /* --- Procedure Card Styles --- */
+        .proc-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-left: 4px solid #0284c7;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+        }
+        .proc-card:hover {
+            border-color: #0284c7;
+            box-shadow: var(--shadow-md);
+            background: #f0f9ff;
+        }
+        .proc-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #e0f2fe;
+            color: #0369a1;
+            margin-bottom: 6px;
+        }
+        .proc-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .proc-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        .proc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white !important;
+            background: #0284c7;
+            padding: 5px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .proc-btn:hover {
+            background: #0369a1;
+        }
+        .sidebar-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            background: #f8fafc;
+            min-height: 48px;
+        }
+        .sidebar-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            user-select: none;
+        }
+        .sidebar-tab:hover {
+            color: var(--primary);
+            background: #f1f5f9;
+        }
+        .sidebar-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: white;
+            font-weight: 700;
+        }
+        .tab-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+            background: #e2e8f0;
+            color: var(--text-muted);
+        }
+        .sidebar-tab.active .tab-badge {
+            background: var(--primary);
+            color: white;
+        }
+        .tab-badge.proc-count {
+            background: #0284c7;
+            color: white;
+        }
+
         /* --- MAIN CHAT AREA --- */
         .main-area {
             flex: 1;
             display: flex;
             flex-direction: column;
             min-width: 0;
+            position: relative;
+        }
+
+        /* Floating Scroll-to-Bottom Button */
+        .scroll-bottom-btn {
+            position: absolute;
+            bottom: 95px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            z-index: 50;
+            transition: all 0.2s ease-in-out;
+            user-select: none;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+        .scroll-bottom-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
+        }
+        .scroll-bottom-btn i {
+            font-size: 0.8rem;
+            animation: bounceDown 1.2s infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
         }
 
         .top-bar {
@@ -197,6 +345,7 @@
             color: var(--primary); margin-top: 16px; margin-bottom: 8px; font-size: 1.1em; 
         }
         .bot .bubble p { margin-bottom: 10px; }
+        .bot .bubble strong { color: #0f172a; font-weight: 600; }
         .bot .bubble blockquote {
             border-left: 3px solid var(--accent);
             padding-left: 12px;
@@ -215,24 +364,105 @@
             background: #1e293b; color: #f8fafc; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 12px 0;
         }
 
-        /* Inline Citation Badge */
+        /* Modern Markdown Tables */
+        .bot .bubble table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 14px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            font-size: 0.88rem;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .bot .bubble th {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            text-align: left;
+            padding: 11px 14px;
+            border-bottom: 2px solid #cbd5e1;
+            border-right: 1px solid #e2e8f0;
+            letter-spacing: 0.01em;
+        }
+        .bot .bubble th:last-child {
+            border-right: none;
+        }
+        .bot .bubble td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            color: #334155;
+            line-height: 1.5;
+            vertical-align: top;
+        }
+        .bot .bubble td:last-child {
+            border-right: none;
+        }
+        .bot .bubble tr:last-child td {
+            border-bottom: none;
+        }
+        .bot .bubble tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+        .bot .bubble tr:hover td {
+            background: #eff6ff;
+        }
+
+        /* Hierarchical Lists */
+        .bot .bubble ul, .bot .bubble ol {
+            margin: 8px 0 12px 22px;
+            padding-left: 4px;
+        }
+        .bot .bubble li {
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+        .bot .bubble li > ul, .bot .bubble li > ol {
+            margin: 4px 0 6px 18px;
+        }
+        .bot .bubble hr {
+            border: none;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 16px 0;
+        }
+
+        /* Inline Citation Badge (Đồng bộ màu sắc hệ thống Navy/Blue) */
         .cite-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 20px; height: 20px;
-            background: var(--accent);
-            color: white;
-            font-size: 0.7rem;
+            min-width: 24px;
+            height: 20px;
+            padding: 0 7px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            font-size: 0.73rem;
             font-weight: 700;
-            border-radius: 50%;
+            border-radius: 12px;
             cursor: pointer;
-            vertical-align: super;
-            margin: 0 2px;
-            transition: transform 0.2s;
+            vertical-align: 2px;
+            margin: 0 3px;
+            transition: all 0.18s ease-in-out;
             text-decoration: none !important;
+            box-shadow: 0 1px 2px rgba(37, 99, 235, 0.08);
+            user-select: none;
+            line-height: 1;
         }
-        .cite-badge:hover { transform: scale(1.2); background: #b45309; }
+        .cite-badge:hover {
+            background: #1e40af;
+            color: #ffffff;
+            border-color: #1e40af;
+            transform: translateY(-1.5px) scale(1.06);
+            box-shadow: 0 3px 8px rgba(30, 64, 175, 0.28);
+        }
+        .cite-badge:active {
+            transform: translateY(0) scale(0.98);
+        }
 
         /* --- CLARIFICATION CARD --- */
         .clarification-card {
@@ -455,17 +685,35 @@
                 </button>
             </div>
         </div>
+
+        <!-- Nút cuộn xuống dưới cùng -->
+        <button id="scrollToBottomBtn" class="scroll-bottom-btn" onclick="scrollToBottom()" title="Cuộn xuống tin nhắn mới nhất">
+            <i class="fa-solid fa-arrow-down"></i> <span>Tin nhắn mới nhất</span>
+        </button>
     </div>
 
-    <!-- SIDEBAR TÀI LIỆU -->
+    <!-- SIDEBAR TÀI LIỆU & THỦ TỤC -->
     <div class="doc-sidebar">
-        <div class="sidebar-header">
-            <i class="fa-solid fa-book-open"></i> Tài liệu tham khảo
+        <div class="sidebar-tabs">
+            <div class="sidebar-tab active" id="tabDoc" onclick="switchSidebarTab('doc')">
+                <i class="fa-solid fa-book-open"></i> <span>Văn bản pháp luật</span>
+                <span class="tab-badge" id="docBadgeCount">0</span>
+            </div>
+            <div class="sidebar-tab" id="tabProc" onclick="switchSidebarTab('proc')">
+                <i class="fa-solid fa-file-signature"></i> <span>Thủ tục hành chính</span>
+                <span class="tab-badge proc-count" id="procBadgeCount">0</span>
+            </div>
         </div>
         <div class="doc-list" id="docList">
             <div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size:0.9rem;">
                 <i class="fa-solid fa-magnifying-glass" style="font-size:2rem;margin-bottom:15px;opacity:0.3;"></i><br>
                 Các văn bản liên quan sẽ xuất hiện tại đây khi bạn đặt câu hỏi.
+            </div>
+        </div>
+        <div class="doc-list" id="procList" style="display:none;">
+            <div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size:0.9rem;">
+                <i class="fa-solid fa-folder-open" style="font-size:2rem;margin-bottom:15px;opacity:0.3;"></i><br>
+                Các thủ tục hành chính liên quan sẽ xuất hiện tại đây khi bạn đặt câu hỏi.
             </div>
         </div>
     </div>
@@ -477,7 +725,38 @@
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
     const docList = document.getElementById('docList');
+    const scrollToBottomBtn = document.getElementById('scrollToBottomBtn');
     let conversationHistory = [];
+    let isUserScrolledUp = false;
+
+    // Theo dõi cuộn của người dùng để bật/tắt nút cuộn xuống dưới
+    chatBox.addEventListener('scroll', function() {
+        const distanceFromBottom = chatBox.scrollHeight - chatBox.scrollTop - chatBox.clientHeight;
+        isUserScrolledUp = distanceFromBottom > 100;
+        
+        if (scrollToBottomBtn) {
+            if (isUserScrolledUp) {
+                scrollToBottomBtn.style.display = 'flex';
+            } else {
+                scrollToBottomBtn.style.display = 'none';
+            }
+        }
+    });
+
+    function scrollToBottom() {
+        isUserScrolledUp = false;
+        chatBox.scrollTo({
+            top: chatBox.scrollHeight,
+            behavior: 'smooth'
+        });
+        if (scrollToBottomBtn) scrollToBottomBtn.style.display = 'none';
+    }
+
+    function autoScroll(force = false) {
+        if (force || !isUserScrolledUp) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
 
     // Auto-resize textarea
     userInput.addEventListener('input', function() {
@@ -492,6 +771,25 @@
         }
     });
 
+    function switchSidebarTab(tab) {
+        const tabDoc = document.getElementById('tabDoc');
+        const tabProc = document.getElementById('tabProc');
+        const docList = document.getElementById('docList');
+        const procList = document.getElementById('procList');
+
+        if (tab === 'doc') {
+            tabDoc.classList.add('active');
+            tabProc.classList.remove('active');
+            docList.style.display = 'block';
+            procList.style.display = 'none';
+        } else {
+            tabProc.classList.add('active');
+            tabDoc.classList.remove('active');
+            procList.style.display = 'block';
+            docList.style.display = 'none';
+        }
+    }
+
     function resetConversation() {
         conversationHistory = [];
         chatBox.innerHTML = `
@@ -502,12 +800,26 @@
         docList.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size:0.9rem;">
             <i class="fa-solid fa-magnifying-glass" style="font-size:2rem;margin-bottom:15px;opacity:0.3;"></i><br>
             Các văn bản liên quan sẽ xuất hiện tại đây khi bạn đặt câu hỏi.</div>`;
+        const procList = document.getElementById('procList');
+        if (procList) {
+            procList.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--text-muted);font-size:0.9rem;">
+                <i class="fa-solid fa-folder-open" style="font-size:2rem;margin-bottom:15px;opacity:0.3;"></i><br>
+                Các thủ tục hành chính liên quan sẽ xuất hiện tại đây khi bạn đặt câu hỏi.</div>`;
+        }
+        const docBadgeCount = document.getElementById('docBadgeCount');
+        const procBadgeCount = document.getElementById('procBadgeCount');
+        if (docBadgeCount) docBadgeCount.textContent = '0';
+        if (procBadgeCount) procBadgeCount.textContent = '0';
+        switchSidebarTab('doc');
         userInput.focus();
     }
 
     function updateSidebar(citations) {
         if (!citations || Object.keys(citations).length === 0) return;
         
+        const docBadgeCount = document.getElementById('docBadgeCount');
+        if (docBadgeCount) docBadgeCount.textContent = Object.keys(citations).length;
+
         docList.innerHTML = '';
         Object.entries(citations).forEach(([key, src]) => {
             const meta = src.metadata || {};
@@ -527,10 +839,45 @@
         });
     }
 
+    function updateProceduresSidebar(procedures) {
+        if (!procedures || procedures.length === 0) return;
+        
+        const procBadgeCount = document.getElementById('procBadgeCount');
+        const procList = document.getElementById('procList');
+        if (procBadgeCount) procBadgeCount.textContent = procedures.length;
+        
+        procList.innerHTML = '';
+        procedures.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'proc-card';
+            const codeBadge = p.procedure_code ? `<span class="proc-badge"><i class="fa-solid fa-hashtag"></i> ${p.procedure_code}</span>` : '';
+            const fieldBadge = p.field ? `<span class="proc-badge" style="background:#fef3c7;color:#b45309;margin-left:4px;"><i class="fa-solid fa-tag"></i> ${p.field}</span>` : '';
+            const reasonBox = p.relevance_reason ? `<div style="font-size:0.75rem;color:#0369a1;background:#f0f9ff;padding:6px 8px;border-radius:4px;margin:6px 0;line-height:1.4;"><i class="fa-solid fa-wand-magic-sparkles"></i> <b>Lý do:</b> ${p.relevance_reason}</div>` : '';
+            
+            const dvcLink = p.source_url ? 
+                `<a href="${p.source_url}" target="_blank" class="proc-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Nộp hồ sơ trực tuyến</a>` : 
+                `<a href="https://dichvucong.gov.vn" target="_blank" class="proc-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Cổng DVC Quốc gia</a>`;
+
+            card.innerHTML = `
+                <div>${codeBadge}${fieldBadge}</div>
+                <div class="proc-title">${p.procedure_name}</div>
+                ${reasonBox}
+                <div class="proc-meta">
+                    ${p.implementing_authority ? `<div><i class="fa-solid fa-landmark"></i> <b>Cơ quan:</b> ${p.implementing_authority}</div>` : ''}
+                    ${p.matched_legal_bases && p.matched_legal_bases.length > 0 ? `<div><i class="fa-solid fa-scale-balanced"></i> <b>Căn cứ:</b> ${p.matched_legal_bases.join(', ')}</div>` : ''}
+                </div>
+                ${dvcLink}
+            `;
+            procList.appendChild(card);
+        });
+    }
+
     function parseCitations(text, citations) {
         return text.replace(/\[(\d+)\]/g, (match, num) => {
             if (!citations[num]) return match;
-            return `<a class="cite-badge" href="#doc-ref-${num}" onclick="document.getElementById('doc-ref-${num}')?.scrollIntoView({behavior:'smooth',block:'center'})">${num}</a>`;
+            const meta = citations[num].metadata || {};
+            const docLabel = (meta.title || meta.doc_num || 'văn bản') + (meta.article ? ` (${meta.article})` : '');
+            return `<a class="cite-badge" href="javascript:void(0)" title="Xem nguồn trích dẫn [${num}]: ${docLabel}" onclick="switchSidebarTab('doc'); const el = document.getElementById('doc-ref-${num}'); if (el) { el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('active'); setTimeout(() => el.classList.remove('active'), 2000); }"><i class="fa-solid fa-bookmark" style="font-size:0.55rem;margin-right:3px;opacity:0.7;"></i>${num}</a>`;
         });
     }
 
@@ -641,7 +988,7 @@
             }
 
             containerEl.appendChild(card);
-            chatBox.scrollTop = chatBox.scrollHeight;
+            autoScroll();
         }
 
         // MỌI bước đều được APPEND thành 1 dòng MỚI trong nhật ký — không
@@ -653,7 +1000,7 @@
             line.className = `step-line ${state}`;
             line.innerHTML = `<i class="${iconClass}"></i> <span>${html}</span>`;
             stepLogEl.appendChild(line);
-            chatBox.scrollTop = chatBox.scrollHeight;
+            autoScroll();
         }
 
         function handleStep(data) {
@@ -704,6 +1051,12 @@
                 if (status === 'done') {
                     renderClarificationCard(d, botContentWrap);
                 }
+            } else if (step === 'related_procedures') {
+                if (d.procedures && d.procedures.length > 0) {
+                    updateProceduresSidebar(d.procedures);
+                    addStepLine('fa-solid fa-file-signature',
+                        `Tìm thấy <b>${d.count} thủ tục hành chính</b> liên quan (xem tab Thủ tục)`, 'done');
+                }
             } else if (step === 'answer') {
                 if (status === 'start') {
                     addStepLine('fa-solid fa-pen-nib', 'Đang tổng hợp câu trả lời...', 'active');
@@ -713,7 +1066,7 @@
                 }
             }
 
-            chatBox.scrollTop = chatBox.scrollHeight;
+            autoScroll();
         }
 
         try {
@@ -757,7 +1110,7 @@
                             const processed = parseCitations(fullText, citationsData);
                             bubbleEl.innerHTML = marked.parse(processed);
                             bubbleEl.querySelectorAll("pre code").forEach(el => hljs.highlightElement(el));
-                            chatBox.scrollTop = chatBox.scrollHeight;
+                            autoScroll();
                         }
 
                         // Xử lý khi câu trả lời hoàn tất
@@ -773,6 +1126,10 @@
 
                             if (data.data.clarification) {
                                 renderClarificationCard(data.data.clarification, botContentWrap);
+                            }
+
+                            if (data.data.related_procedures) {
+                                updateProceduresSidebar(data.data.related_procedures);
                             }
 
                             updateSidebar(citationsData);
@@ -805,7 +1162,7 @@
         `;
         row.querySelector('.bubble').textContent = text;
         chatBox.appendChild(row);
-        chatBox.scrollTop = chatBox.scrollHeight;
+        autoScroll(true);
     }
 </script>
 

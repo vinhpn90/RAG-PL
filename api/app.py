@@ -117,6 +117,7 @@ async def chat_endpoint(req: ChatRequest):
             "citations": {},
             "sources": [],
             "sub_queries": [],
+            "related_procedures": [],
             "steps": []
         }
 
@@ -146,12 +147,16 @@ async def chat_endpoint(req: ChatRequest):
                     full_response["sources"] = data.get("sources", [])
                 elif step_name == "clarification" and status == "done":
                     full_response["clarification"] = data
+                elif step_name == "related_procedures" and status == "done":
+                    full_response["related_procedures"] = data.get("procedures", [])
                 elif step_name == "answer" and status == "done":
                     full_response["final_answer"] = data.get("text", "")
                     if data.get("clarification"):
                         full_response["clarification"] = data.get("clarification")
                     if data.get("citations"):
                         full_response["citations"] = data.get("citations")
+                    if data.get("related_procedures"):
+                        full_response["related_procedures"] = data.get("related_procedures")
 
             return JSONResponse(content=full_response)
         except Exception as e:
