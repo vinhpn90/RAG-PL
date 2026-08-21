@@ -872,12 +872,33 @@
         });
     }
 
+    function focusDocument(num) {
+        if (!num) return;
+        switchSidebarTab('doc');
+        setTimeout(() => {
+            const el = document.getElementById(`doc-ref-${num}`);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.classList.add('active');
+                setTimeout(() => el.classList.remove('active'), 2500);
+            }
+        }, 100);
+    }
+
     function parseCitations(text, citations) {
-        return text.replace(/\[(\d+)\]/g, (match, num) => {
-            if (!citations[num]) return match;
-            const meta = citations[num].metadata || {};
-            const docLabel = (meta.title || meta.doc_num || 'văn bản') + (meta.article ? ` (${meta.article})` : '');
-            return `<a class="cite-badge" href="javascript:void(0)" title="Xem nguồn trích dẫn [${num}]: ${docLabel}" onclick="switchSidebarTab('doc'); const el = document.getElementById('doc-ref-${num}'); if (el) { el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('active'); setTimeout(() => el.classList.remove('active'), 2000); }"><i class="fa-solid fa-bookmark" style="font-size:0.55rem;margin-right:3px;opacity:0.7;"></i>${num}</a>`;
+        if (!text) return "";
+        const cMap = citations || {};
+        // Hỗ trợ cả [1], [ 1 ], 【1】, 【 1 】
+        return text.replace(/(?:\[|\u3010)\s*(\d+)\s*(?:\]|\u3011)/g, (match, num) => {
+            const n = String(num).trim();
+            const src = cMap[n] || cMap[parseInt(n, 10)];
+            let docLabel = `Văn bản [${n}]`;
+            if (src && src.metadata) {
+                const meta = src.metadata;
+                docLabel = (meta.title || meta.doc_num || 'Văn bản') + (meta.article ? ` (${meta.article})` : '');
+            }
+            const escapedLabel = docLabel.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            return `<a class="cite-badge" href="javascript:void(0)" title="Xem nguồn trích dẫn [${n}]: ${escapedLabel}" onclick="focusDocument('${n}')"><i class="fa-solid fa-bookmark" style="font-size:0.55rem;margin-right:3px;opacity:0.7;"></i>${n}</a>`;
         });
     }
 
